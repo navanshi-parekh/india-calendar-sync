@@ -1,0 +1,188 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//India Macro Indicators Feed//EN
+X-WR-CALNAME:India Macro Indicators
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VEVENT
+SUMMARY:📊 Consumer Inflation Index
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260924
+DTSTAMP:20260922T200658Z
+UID:0d8bbc70-7ea1-444a-b505-8d5be105f289@indiamacroindicators
+DESCRIPTION:Consumer Inflation Index \nTracks and provides a timely insigh
+ t into India’s CPI trends.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 Monitors repo rate trends to understand economic phases and m
+ onetary policy stance.
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260924
+DTSTAMP:20260922T200658Z
+UID:89589919-ddd7-42bc-a1ad-de9e1c4abb92@indiamacroindicators
+DESCRIPTION:Interest Rate Outlook Index \nMonitors repo rate trends to und
+ erstand economic phases and monetary policy stance.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 Consumer Inflation
+DTSTART;VALUE=DATE:20260323
+DTEND;VALUE=DATE:20260324
+DTSTAMP:20260922T200658Z
+UID:8eecc79f-1c7a-40d5-8dd9-8eb529e252e3@indiamacroindicators
+DESCRIPTION:Services Sector Activity \nIndustrial Sector Performance \nAgr
+ iculture Output \nConsumer Inflation \nEquity Market Optimism \nFinancial 
+ Sector Soundness \nGlobal Economic Impact \nInterest Rate Outlook \nOther 
+ HFIs \nKey Economic Indicators
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 SubindicesServices Sector Activity IndexIndustrial Sector Per
+ formance IndexAgriculture Output IndexConsumer Inflation IndexEquity Marke
+ t Optimism IndexGlobal Economic Impact IndexFinancial Sector Soundness Ind
+ exInterest Rate Outlook Index
+DTSTART;VALUE=DATE:20260323
+DTEND;VALUE=DATE:20260324
+DTSTAMP:20260922T200658Z
+UID:68700094-c8db-4382-8792-734b0d02de78@indiamacroindicators
+DESCRIPTION:SubindicesServices Sector Activity IndexIndustrial Sector Perf
+ ormance IndexAgriculture Output IndexConsumer Inflation IndexEquity Market
+  Optimism IndexGlobal Economic Impact IndexFinancial Sector Soundness Inde
+ xInterest Rate Outlook Index
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 Services Sector Activity IndexIndustrial Sector Performance I
+ ndexAgriculture Output IndexConsumer Inflation IndexEquity Market Optimism
+  IndexGlobal Economic Impact IndexFinancial Sector Soundness IndexInterest
+  Rate Outlook Index
+DTSTART;VALUE=DATE:20260323
+DTEND;VALUE=DATE:20260324
+DTSTAMP:20260922T200658Z
+UID:1d97ff66-86a0-4adf-8e76-cb910a5ef19d@indiamacroindicators
+DESCRIPTION:Services Sector Activity IndexIndustrial Sector Performance In
+ dexAgriculture Output IndexConsumer Inflation IndexEquity Market Optimism 
+ IndexGlobal Economic Impact IndexFinancial Sector Soundness IndexInterest 
+ Rate Outlook Index
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 India's Economic Calendar tracks key economic releases\, RBI 
+ policy decisions\, inflation data\, and growth indicators\, showing actual
+ s\, forecasts\, and previous values for every market-moving event in one p
+ lace.
+DTSTART;VALUE=DATE:20261223
+DTEND;VALUE=DATE:20261224
+DTSTAMP:20260922T200658Z
+UID:be96f255-5b18-4455-97fb-cfd3671549e0@indiamacroindicators
+DESCRIPTION:India's Economic Calendar \nIndia's Economic Calendar tracks k
+ ey economic releases\, RBI policy decisions\, inflation data\, and growth 
+ indicators\, showing actuals\, forecasts\, and previous values for every m
+ arket-moving event in one place.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 HSBC Manufacturing PMI
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
+DTSTAMP:20260922T200658Z
+UID:8b01d75d-f340-4866-881f-a8745deb950d@indiamacroindicators
+DESCRIPTION:30 \n31 \n1 \nHSBC Manufacturing PMI \nGST Collections \n2 \n3
+  \nHSBC Services PMI \n4 \n5
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 HSBC Manufacturing PMI
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20260902
+DTSTAMP:20260922T200658Z
+UID:d50017db-ca0a-49ec-971a-20b776ff79b8@indiamacroindicators
+DESCRIPTION:1 \nHSBC Manufacturing PMI \nGST Collections
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 HSBC Manufacturing PMI
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260924
+DTSTAMP:20260922T200658Z
+UID:17b05dc2-2024-45d3-af10-9e9807de33d7@indiamacroindicators
+DESCRIPTION:HSBC Manufacturing PMI \nGST Collections
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 HSBC Services PMI
+DTSTART;VALUE=DATE:20260903
+DTEND;VALUE=DATE:20260904
+DTSTAMP:20260922T200658Z
+UID:216b98f8-ad5c-4c94-9573-7cb0eef1536e@indiamacroindicators
+DESCRIPTION:3 \nHSBC Services PMI
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 HSBC Services PMI
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260924
+DTSTAMP:20260922T200658Z
+UID:4157b3f3-c430-4d19-a326-4316be87b68f@indiamacroindicators
+DESCRIPTION:HSBC Services PMI
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 Wholesale Price Index (WPI)
+DTSTART;VALUE=DATE:20260913
+DTEND;VALUE=DATE:20260914
+DTSTAMP:20260922T200658Z
+UID:59180f5c-fb5e-4071-975f-2f2684d2c2ca@indiamacroindicators
+DESCRIPTION:13 \n14 \nWholesale Price Index (WPI) \nConsumer Price Index (
+ CPI) Inflation \n15 \nUnemployment Rate \nBalance of trade \n16 \nMoney Su
+ pply (M3) \n17 \n18 \nBank Credit Growth \n19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 Wholesale Price Index (WPI)
+DTSTART;VALUE=DATE:20260914
+DTEND;VALUE=DATE:20260915
+DTSTAMP:20260922T200658Z
+UID:730860d7-b68e-4683-b0a9-83db5926a893@indiamacroindicators
+DESCRIPTION:14 \nWholesale Price Index (WPI) \nConsumer Price Index (CPI) 
+ Inflation
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 Wholesale Price Index (WPI)
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260924
+DTSTAMP:20260922T200658Z
+UID:34b63d8b-30e5-4c19-a223-156db77cc177@indiamacroindicators
+DESCRIPTION:Wholesale Price Index (WPI) \nConsumer Price Index (CPI) Infla
+ tion
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 IIP
+DTSTART;VALUE=DATE:20260927
+DTEND;VALUE=DATE:20260928
+DTSTAMP:20260922T200658Z
+UID:72845a03-8e73-47c4-bcc2-b2a03410aa3b@indiamacroindicators
+DESCRIPTION:27 \n28 \nIIP \n29 \n30 \nSector-wise Bank Credit \nGovernment
+  Capital Expenditure \n1 \n2 \n3
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 IIP
+DTSTART;VALUE=DATE:20260928
+DTEND;VALUE=DATE:20260929
+DTSTAMP:20260922T200658Z
+UID:5fc17e0c-fe40-44e5-bcc9-8812dc55ff1c@indiamacroindicators
+DESCRIPTION:28 \nIIP
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 IIP
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260924
+DTSTAMP:20260922T200658Z
+UID:e9976d3f-e9d0-44e7-9686-24a178c29485@indiamacroindicators
+DESCRIPTION:IIP
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:📊 The High Impact releases are the repo rate decision\, CPI\, q
+ uarterly GDP and GVA\, the HSBC PMIs\, forex reserves and government capex
+ . They matter because they either set the price of money or shift what the
+  market expects the RBI to do next. Filter by Impact High to see only thes
+ e.
+DTSTART;VALUE=DATE:20261223
+DTEND;VALUE=DATE:20261224
+DTSTAMP:20260922T200658Z
+UID:c22b1211-6515-4ce3-ad6e-e27115037bdf@indiamacroindicators
+DESCRIPTION:The High Impact releases are the repo rate decision\, CPI\, qu
+ arterly GDP and GVA\, the HSBC PMIs\, forex reserves and government capex.
+  They matter because they either set the price of money or shift what the 
+ market expects the RBI to do next. Filter by Impact High to see only these
+ .
+END:VEVENT
+END:VCALENDAR
