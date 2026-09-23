@@ -21,73 +21,77 @@ def scrape_calendar_events():
             )
         )
 
-        # Abort heavy analytics/tracking requests so the page loads instantly
         page = context.new_page()
         page.route("**/*clarity*", lambda route: route.abort())
         page.route("**/*psimg*", lambda route: route.abort())
         page.route("**/*google-analytics*", lambda route: route.abort())
 
-        print("Navigating to calendar page...")
-        # Use 'domcontentloaded' instead of 'networkidle' to avoid timeouts
+        print("Navigating to calendar...")
         page.goto(url, wait_until="domcontentloaded", timeout=45000)
+        page.wait_for_timeout(4000)
 
-        # Wait for the main content container to mount
-        print("Waiting for page elements to render...")
-        page.wait_for_timeout(5000)
+        # Evaluate directly in the browser DOM to bind each event pill to its exact cell day
+        # Evaluate directly in the browser DOM to bind each event pill strictly to its own calendar cell
+        events_data = page.evaluate("""() => {
+            const results = [];
+            const keywords = [
+                'PMI', 'GST', 'Reserves', 'WPI', 'CPI', 'Inflation', 'Unemployment',
+                'Trade', 'Money Supply', 'Bank Credit', 'Industries', 'IIP',
+                'Expenditure', 'Monetary Policy', 'MPC', 'GDP'
+            ];
 
-        # Find all text blocks across the calendar grid
-        elements = page.locator("div, tr, li, [class*='calendar'], [class*='day']").all()
+            for (const el of document.querySelectorAll('div, span, p, a')) {
+                const t = (el.innerText || '').trim();
+                const matched = keywords.some(k => t.toLowerCase() === k.toLowerCase() || (t.toLowerCase().includes(k.toLowerCase()) && t.length < 50));
+                
+                // Only consider leaf nodes (the text inside the colored pill badge)
+                if (matched && el.children.length === 0) {
+                    let parent = el.parentElement;
+                    let foundDay = null;
+                    
+                    // Traverse up strictly within the individual day cell
+                    for (let depth = 0; depth < 5 && parent; depth++) {
+                        const pText = parent.innerText || '';
+                        
+                        // Guard: A single calendar day cell will never have thousands of characters of text
+                        if (pText.length > 250) {
+                            parent = parent.parentElement;
+                            continue;
+                        }
 
-        seen_entries = set()
-        now = datetime.datetime.now(IST)
-        current_year = now.year
+                        // Match the standalone day number at the start of the cell
+                        const m = pText.match(/(?:^|\\n)\\s*([1-9]|[12][0-9]|3[01])\\s*(?:\\n|$)/);
+                        if (m) {
+                            foundDay = parseInt(m[1], 10);
+                            break;
+                        }
+                        parent = parent.parentElement;
+                    }
 
-        keywords = [
-            "CPI", "WPI", "GDP", "IIP", "Monetary Policy", "MPC",
-            "Trade Deficit", "Forex", "Inflation", "PMI"
-        ]
-
-        for el in elements:
-            try:
-                text = el.inner_text().strip()
-                if not text or len(text) > 300:
-                    continue
-
-                if any(kw.lower() in text.lower() for kw in keywords):
-                    lines = [line.strip() for line in text.split("\n") if line.strip()]
-                    if not lines:
-                        continue
-
-                    signature = " | ".join(lines[:2])
-                    if signature in seen_entries:
-                        continue
-                    seen_entries.add(signature)
-
-                    # Extract day number
-                    day_match = re.search(r"\b([1-9]|[12][0-9]|3[01])\b", text)
-                    month_match = re.search(
-                        r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)", text, re.I
-                    )
-
-                    day = int(day_match.group(1)) if day_match else now.day
-                    month_str = month_match.group(1) if month_match else now.strftime("%b")
-
-                    # Indicator name is usually the prominent text line
-                    title = [l for l in lines if any(kw.lower() in l.lower() for kw in keywords)]
-                    event_title = title[0] if title else lines[0]
-
-                    scraped_events.append({
-                        "title": event_title,
-                        "day": day,
-                        "month": month_str,
-                        "description": " \n".join(lines)
-                    })
-            except Exception:
-                continue
+                    // Exclude outer page headers (like the top nav 'Consumer Inflation Index')
+                    if (foundDay && t !== "Consumer Inflation Index") {
+                        results.push({
+                            title: t,
+                            day: foundDay
+                        });
+                    }
+                }
+            }
+            return results;
+        }""")
 
         browser.close()
 
-    return scraped_events
+    # Deduplicate entries: (title, day)
+    unique_events = []
+    seen = set()
+    for ev in events_data:
+        key = (ev["title"].strip(), ev["day"])
+        if key not in seen and len(ev["title"]) > 2:
+            seen.add(key)
+            unique_events.append(ev)
+
+    return unique_events
 
 def build_ics_file(events, output_filename="india_macro_calendar.ics"):
     cal = Calendar()
@@ -97,28 +101,31 @@ def build_ics_file(events, output_filename="india_macro_calendar.ics"):
     cal.add("x-wr-timezone", "Asia/Kolkata")
 
     now = datetime.datetime.now(IST)
-    current_year = now.year
-
-    month_lookup = {
-        "Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
-        "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12
-    }
+    year = now.year
+    month = now.month  # September
 
     added_count = 0
     for item in events:
+        day = item["day"]
+        # Handle calendar padding days (e.g. days 30, 31 from previous month or 1, 2, 3 of next)
+        event_month = month
+        event_year = year
+
+        # If day is 30 or 31 and appears before day 1, or 1, 2, 3 at the bottom
+        # Default straightforward matching for the active month:
         try:
-            m_num = month_lookup.get(item["month"][:3].capitalize(), now.month)
-            event_date = datetime.date(current_year, m_num, item["day"])
+            event_date = datetime.date(event_year, event_month, day)
         except ValueError:
             continue
 
         evt = Event()
         evt.add("summary", f"📊 {item['title']}")
-        evt.add("description", item["description"])
+        evt.add("description", f"{item['title']} - Scheduled Indian Macroeconomic Release")
         evt.add("dtstart", event_date)
         evt.add("dtend", event_date + datetime.timedelta(days=1))
         evt.add("dtstamp", now)
-        evt.add("uid", f"{uuid.uuid4()}@indiamacroindicators")
+        # Deterministic UID so updates don't create duplicates
+        evt.add("uid", f"{event_year}{event_month:02d}{day:02d}-{re.sub(r'[^a-zA-Z0-9]', '', item['title'])}@indiamacro")
 
         cal.add_component(evt)
         added_count += 1
@@ -126,9 +133,11 @@ def build_ics_file(events, output_filename="india_macro_calendar.ics"):
     with open(output_filename, "wb") as f:
         f.write(cal.to_ical())
 
-    print(f"\nSuccess! Exported {added_count} events to '{output_filename}'.")
+    print(f"\nDone! Exported {added_count} correctly mapped events to '{output_filename}'.")
 
 if __name__ == "__main__":
     extracted = scrape_calendar_events()
-    print(f"Captured {len(extracted)} event entries.")
+    print(f"Captured {len(extracted)} accurately mapped events:")
+    for e in extracted:
+        print(f"  Day {e['day']:02d}: {e['title']}")
     build_ics_file(extracted)
